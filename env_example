@@ -1,0 +1,9 @@
+MODE_DEBUG: true
+
+DB_HOST: localhost
+DB_USER: dnd
+DB_PASSWORD: dungeon
+DB_DATABASE: dnd
+DB_PORT: 5432
+
+SOCKET_PORT: 4050

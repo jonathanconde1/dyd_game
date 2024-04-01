@@ -1,0 +1,46 @@
+{
+  "name": "dyd_game",
+  "version": "1.0.0",
+  "description": "Juego de rol multiplayer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanconde1/dyd_game.git"
+  },
+  "keywords": [],
+  "author": "Eli Jonathan Conde Maquera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathanconde1/dyd_game/issues"
+  },
+  "homepage": "https://github.com/jonathanconde1/dyd_game#readme",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.4.5",
+    "phaser": "^3.80.1",
+    "clone": "^2.1.2",
+    "quickselect": "^1.0.0",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "just-clone": "^6.2.0",
+    "mathjs": "^11.8.0",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.22",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "pg": "^8.7.3",
+    "pluralize": "^8.0.0",
+    "socket.io": "^4.6.1"
+  },
+  "devDependencies": {}
+}
