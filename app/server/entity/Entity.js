@@ -5,7 +5,7 @@ class Entity {
   }
 
   addComponent(component){
-    this.component[component.constructor.name] = component;
+    this.components[component.constructor.name] = component;
   }
 
   getComponent(componentType){
@@ -13,3 +13,5 @@ class Entity {
   }
 
 }
+
+ module.exports.Entity = Entity;

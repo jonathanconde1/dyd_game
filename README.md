@@ -6,6 +6,10 @@ Calabosos y dragones
 
 juego de rol multiplayer en construccion ...
 
+# Patrones
+  - (ECS) entidad componente y sistema.
+  - Estatdos.
+
 # Estructura (Planificando)
 
 player -> avatar

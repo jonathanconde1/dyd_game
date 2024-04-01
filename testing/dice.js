@@ -10,5 +10,5 @@
 
 const Dice = require("../app/server/component/DiceComponent.js").DiceComponent;
 // Ejemplo de uso
-const d20 = new Dice(4, 20); // Crear cuatro dados de veinte caras
+const d20 = new Dice("dado_20", 4, 20); // Crear cuatro dados de veinte caras
 console.log(d20.roll()); // Tirar los dados y mostrar los resultados
