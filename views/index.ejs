@@ -1,0 +1,1232 @@
+
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="repetidor de tramas">
+      <meta name="author" content="Jonathan Conde Maquera">
+      <meta name="generator" content="v 0.01">
+      <title>DND</title>
+
+      <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/"> -->
+
+
+
+      <!-- Bootstrap core CSS -->
+  <!-- <link href=".../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="../plugins/bootstrap/5.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../plugins/datatables.min.css" />
+    <link rel="stylesheet" href="../plugins/toast/jquery.toast.min.css" />
+    <link rel="stylesheet" href="../plugins/daterangepicker.css" />
+    <!-- <link rel="stylesheet" href="../node_modules/daterangepicker/daterangepicker.css" /> -->
+
+
+      <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+
+
+      <!-- Custom styles for this template -->
+      <link href="/css/dashboard.css" rel="stylesheet">
+      <!-- <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css" /> -->
+      <link rel="stylesheet" href="../plugins/buttons.dataTables.min.css" />
+      <!-- <script src="../node_modules/xterm/lib/xterm.js"></script> -->
+
+    </head>
+    <body>
+
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+
+          </ul>
+
+        </div>
+      </nav> -->
+
+      <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="avatar">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-avatar" type="button" role="tab" aria-controls="pills-avatar" aria-selected="false">Avatar</button>
+          </li>
+          <li class="nav-item" role="mapa">
+            <button class="nav-link" id="pills-mapa-tab" data-bs-toggle="pill" data-bs-target="#pills-mapa" type="button" role="tab" aria-controls="pills-mapa" aria-selected="false">Mapa</button>
+          </li>
+          <li class="nav-item" role="game">
+            <button class="nav-link" id="pills-game-tab" data-bs-toggle="pill" data-bs-target="#pills-game" type="button" role="tab" aria-controls="pills-game" aria-selected="false">Game</button>
+          </li>
+
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-avatar" role="tabpanel" aria-labelledby="pills-avatar-tab">
+            <p align="center"><strong>SELECCIONE UN AVATAR</strong></p>
+            <div class="table-responsive">
+              <table id="avatarsTable" class="display" width="100%"></table>
+            </div>
+
+
+            <section class="content">
+              <div class="container-fluid">
+                <div class="d-grid gap-2">
+                  <!-- <button type="button" id="crear_personaje" class="btn btn-primary btn-sm">Crear personaje</button> -->
+                  <button onclick="createPersonaje()" class="btn btn-primary" >
+                    <span data-feather="home"></span>
+                    Crear avatar
+                  </button>
+                  <div class="navbar-nav">
+                    <div class="nav-item text-nowrap">
+                      <form action="/logout" method="post">
+                        <button class="btn btn-primary" type="submit">Cerra session</button>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </section>
+          </div>
+          <div class="tab-pane fade" id="pills-mapa" role="tabmapa" aria-labelledby="pills-mapa-tab">
+            <div id="avatar" class="">
+              Cargando avatar ...
+            </div>
+            <select id="idSelectMapa" class="form-select" aria-label="Default select example">
+              <option value="0" selected>Seleccione el mapa</option>
+              <option value="1">Prisioneros de los Kobolds</option>
+              <option value="2">El pozo de los deseos</option>
+              <option value="3">El culto a Pharos</option>
+              <option value="4">El titiritero</option>
+              <option value="5">Ladrones de suenos</option>
+              <option value="6">El Cofre de Rakkan</option>
+            </select>
+            <button onclick="changeAvatar()" class="btn btn-primary" >
+              <span data-feather="home"></span>
+              Cambiar avatar
+            </button>
+            <button onclick="selectMapa()" class="btn btn-primary" >
+              <span data-feather="home"></span>
+              Cargar mapa
+            </button>
+
+            <div id="imagenMapa" class="">
+              Cargando mapa ...
+            </div>
+            <section class="content">
+              <div class="container-fluid">
+                <div class="d-grid gap-2">
+                  <!-- <button type="button" id="crear_personaje" class="btn btn-primary btn-sm">Crear personaje</button> -->
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <!-- <div id="panel_avatars" class="">
+
+                    </div> -->
+                    <!-- <div class="table-responsive">
+                      <table id="avatarTable" class="display" width="100%"></table>
+
+                      </table>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="tab-pane fade" id="pills-game" role="tabpanel" aria-labelledby="pills-game-tab">
+            <div class="" id="phaser-game"></div>
+            <!-- <%if(user.permissions.indexOf('admin_users')>=0){%>
+              <button type="button" id="pelea" onclick="modoBatalla()" class="btn btn-primary btn-sm">Modo Batalla</button>
+              <button type="button" id="descanzo" onclick="modoDescanzo()" class="btn btn-primary btn-sm">Modo Descanzo</button>
+              <button type="button" id="golpe" onclick="golpe()" class="btn btn-primary btn-sm">Golpe</button>
+              <button type="button" id="mana" onclick="mana()" class="btn btn-primary btn-sm">Mana</button>
+              <button type="button" id="recompensa" onclick="reconpensa()" class="btn btn-primary btn-sm">Recompensa</button>
+            <%}%> -->
+
+
+
+          </div>
+
+          <div class="tab-pane fade" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
+              <div class="display" width="100%">
+                <button type="button" id="pelea" onclick="createItem()" class="btn btn-primary btn-sm">Crear item</button>
+                  Aqui los items ...
+              </div>
+              <div class="">
+                <table id="itemsTable" class="display" width="100%"></table>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-avatars" role="tabpanel" aria-labelledby="pills-avatars-tab">
+              <div class="">
+                <table id="avatarsTable" class="display" width="100%"></table>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-monitoreo-migration" role="tabpanel" aria-labelledby="pills-monitoreo-migration-tab">
+
+            <div class="row">
+              <div class="col-4">
+                <div class="d-grid gap-2">
+                  <button type="button" id="checkMigrationStatus" class="btn btn-primary btn-sm">Calcular estado de migracion</button>
+                  <button type="button" id="checkMigrationStart" class="btn btn-primary btn-sm">Encender migracion de 1 mes</button>
+                </div>
+                <div class="">
+                </div>
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkMigrationStatus">
+                  <label class="form-check-label" for="checkMigrationStatus">
+                    Calcular estado de migracion.
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="checkMigrationStart">
+                  <label class="form-check-label" for="checkMigrationStart">
+                    Encender migracion de 1 mes.
+                  </label>
+                </div> -->
+              </div>
+              <div class="col-8">
+                <div class="display" width="100%">
+                    <div id="migration_terminal" class="display" width="100%"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <p align="center"><strong>TABLA MIGRACION</strong></p>
+            <div class="container" id="migration">
+            </div>
+
+          </div>
+          <%if(user.permissions.indexOf('admin_users')>=0){%>
+
+          <%}%>
+
+          <%if(user.permissions.indexOf('admin_users')>=0){%>
+          <div class="tab-pane fade" id="pills-users" role="tabpanel" >
+              <section class="content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="p-3 border bg-linght">
+                        <button id="buttonShowModalUser" type="button" name="button" class="btn btn-primary">Nuevo usuario</button>
+                        <p class="text-center"><strong>Lista de usuarios</strong></p>
+                        <table id="usersTable" class="display" width="100%"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+          </div>
+          <%}%>
+          <%if(user.permissions.indexOf('admin_users')>=0){%>
+          <div class="tab-pane fade" id="pills-histories" role="tabpanel" >
+              <section class="content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="p-3 border bg-linght">
+                        <p class="text-center"><strong>Historial de usuario</strong></p>
+                        <table id="historiesTable" class="display" width="100%"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+          </div>
+          <%}%>
+          <%if(user.permissions.indexOf('admin_users')>=0){%>
+          <div class="tab-pane fade" id="pills-roles" role="tabpanel" >
+              <section class="content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="p-3 border bg-linght">
+                        <button id="buttonShowModalRole" type="button" name="button" class="btn btn-primary">Nuevo rol</button>
+                        <p class="text-center"><strong>Lista de roles</strong></p>
+                        <table id="rolesTable" class="display" width="100%"></table>
+
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div class="col-6">
+                      <div class="p-3 border bg-linght">
+                        <p class="text-center"><strong>Lista de permisos</strong></p>
+                        <table id="permissionsTable" class="display" width="100%"></table>
+
+                        </table>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </section>
+          </div>
+          <%}%>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Configuraciones</h5>
+          <button onclick="hideModalSetting()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Automatic = </span>
+            <input type="text" class="form-control" placeholder="false" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          Solo acepta 2 valores true y false, true : cuando se encienda el servidor empezara a transmitir.
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalSetting()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal avatar-->
+  <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Creando Personaje</h5>
+          <button onclick="hideModalCreatePersonaje()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputAvatarName" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Clase :</span>
+            <select id="selectAvatarClase" class="form-control" aria-label="Default select example">
+              <option value="guerrero">Guerrero</option>
+              <option value="clerigo">clerigo</option>
+              <option value="picaro">picaro</option>
+              <option value="mago">mago</option>
+              <option value="explorador">explorador</option>
+              <%if(user.permissions.indexOf('admin_users')>=0){%>
+                <option value="la hechicera">la hechicera</option>
+                <option value="el dragon">el dragon</option>
+                <option value="el caballero">el caballero</option>
+                <option value="maton">maton</option>
+                <option value="sectario">sectario</option>
+                <option value="sectariofanatico">sectariofanatico</option>
+                <option value="elementalfuego">elementalfuego</option>
+                <option value="Ladron de suenos">Ladron de suenos</option>
+                <option value="Vilena piesligeros">Vilena piesligeros</option>
+                <option value="Gnoll">Gnoll</option>
+                <option value="Gnoll lider">Gnoll lider</option>
+                <option value="Gnoll colmillo de yeenoghu">Gnoll colmillo de yeenoghu</option>
+              <%}%>
+            </select>
+          </div>
+
+
+          El resto de datos se llenaran conforme a las fichas de personaje.
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalCreatePersonaje()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="createPersonajeSubmit()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal mana-->
+  <div class="modal fade" id="manaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Mana</h5>
+          <button onclick="hideModalMana()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Descripcion :</span>
+            <input id="inputManaDescription" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="Efecto en batalla">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Player :</span>
+            <!-- <span class="input-group-text" id="basic-addon1">id :</span>
+            <input id="inputManaId" type="text" class="form-control" plasceholder="" aria-label="Username" aria-describedby="basic-addon1"> -->
+            <select class="form-control" id="selectManaAvatar">
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">cantidad :</span>
+            <input id="inputManaCant" type="text" class="form-control" plasceholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalMana()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="saveMana()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal golpe-->
+  <div class="modal fade" id="golpeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Golpe</h5>
+          <button onclick="hideModalGolpe()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Descripcion :</span>
+            <input id="inputGolpeDescription" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="Golpe en batalla">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Player :</span>
+            <!-- <span class="input-group-text" id="basic-addon1">id :</span>
+            <input id="inputGolpeId" type="text" class="form-control" plasceholder="" aria-label="Username" aria-describedby="basic-addon1"> -->
+            <select class="form-control" id="selectGolpeAvatar">
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">cantidad :</span>
+            <input id="inputGolpeCant" type="text" class="form-control" plasceholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalGolpe()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="saveGolpe()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal reconpensa-->
+  <div class="modal fade" id="recompensaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recompensar</h5>
+          <button onclick="hideModalRecompensa()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Jugador :</span>
+            <select class="form-control" id="selectRecompensaAvatar">
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Clase :</span>
+            <select class="form-control" id="selectRecompensaClase">
+              <option value="0">Todo</option>
+              <option value="1">Barbaro</option>
+              <option value="2">Bardo</option>
+              <option value="3">Brujo</option>
+              <option value="4">Clerido</option>
+              <option value="5">Druida</option>
+              <option value="6">Explorador</option>
+              <option value="7">Guerrero</option>
+              <option value="8">Hechicero</option>
+              <option value="9">Mago</option>
+              <option value="10">Monje</option>
+              <option value="11">Paladin</option>
+              <option value="12">Picaro</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nivel :</span>
+            <select class="form-control" id="selectRecompensaLevel">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Descripcion :</span>
+            <input id="inputRecompensaDescription" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" value="Recompensa obtenida en batalla">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Tipo :</span>
+            <select class="form-control" id="selectRecompensaType">
+              <option value="0">Dinero</option>
+              <option value="1">Objeto</option>
+              <option value="2">Equipo</option>
+              <option value="3">Conjuro</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Item :</span>
+            <select class="form-control" id="selectRecompensaItem">
+            </select>
+          </div>
+          <!-- <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">cantidad :</span>
+            <input id="inputRecompensaCant" type="text" class="form-control" plasceholder="" aria-describedby="basic-addon1" value="1">
+          </div> -->
+
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalRecompensa()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="saveRecompensa()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal create item-->
+  <div class="modal fade" id="createItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Item</h5>
+          <button onclick="hideModalCreateItem()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputItemName" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Descripcion :</span>
+            <input id="inputItemDescription" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Tipo :</span>
+            <select class="form-control" id="selectItemType">
+              <option value="0">Dinero</option>
+              <option value="1">Objeto</option>
+              <option value="2">Equipo</option>
+              <option value="3">Conjuro</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Peso :</span>
+            <input id="inputItemWeight" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value='0'>
+          </div>`
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Dano :</span>
+            <input id="inputItemDamage" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value='0'>
+          </div>`
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Propiedades :</span>
+            <input id="inputItemProperties" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Consumible :</span>
+            <select class="form-control" id="selectItemConsumable">
+              <option value="1">True</option>
+              <option value="0">Flase</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Manos :</span>
+            <input id="inputItemHands" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value='1'>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Capacidad de carga :</span>
+            <input id="inputItemBurden" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value = '0'>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Velocidad :</span>
+            <input id="inputItemVelocity" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value = '0'>
+            <span class="input-group-text" id="basic-addon1">Clase :</span>
+            <select class="form-control" id="selectItemClase">
+              <option value="0">Todo</option>
+              <option value="1">Barbaro</option>
+              <option value="2">Bardo</option>
+              <option value="3">Brujo</option>
+              <option value="4">Clerido</option>
+              <option value="5">Druida</option>
+              <option value="6">Explorador</option>
+              <option value="7">Guerrero</option>
+              <option value="8">Hechicero</option>
+              <option value="9">Mago</option>
+              <option value="10">Monje</option>
+              <option value="11">Paladin</option>
+              <option value="12">Picaro</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nivel :</span>
+            <select class="form-control" id="selectItemLevel">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. Inspiracion :</span>
+            <input id="inputItemInspiration" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. iniciativa :</span>
+            <input id="inputItemInitiative" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. velocidad :</span>
+            <input id="inputItemSpeed" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. armadura :</span>
+            <input id="inputItemArmor" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. competencia :</span>
+            <input id="inputItemBonus" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. fuerza :</span>
+            <input id="inputItemStrength" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. destreza :</span>
+            <input id="inputItemDexterity" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. Constitucion :</span>
+            <input id="inputItemConstitution" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. Inteligencia :</span>
+            <input id="inputItemIntelligence" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. Sabiduria :</span>
+            <input id="inputItemWisdom" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">B. carisma :</span>
+            <input id="inputItemCharisma" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">dado :</span>
+            <input id="inputItemDado" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="0">
+          </div>
+
+        </div>
+        <div class="modal-footer">`
+          <button onclick="hideModalCreateItem()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="saveCreateItem()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal token-->
+  <div class="modal fade" id="tokenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Token</h5>
+          <button onclick="hideModalToken()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">TOKEN :</span>
+            <input id="inputToken" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">TIPO :</span>
+            <input id="inputType" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          Solo se muestra el valor actual del token, si desea se puede modificar bajo responsabilidad del usuario.
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalToken()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="changeToken()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal user-->
+  <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Crear nuevo usuario</h5>
+          <button onclick="hideModalUser()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputUser" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">password :</span>
+            <input id="inputPassword" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          * Toda actividad queda registrada en el sistema.
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalUser()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="createUser()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal delete user-->
+  <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar usuario</h5>
+          <button onclick="hideModalDeleteUser()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id = "pDeleteUser"></p>
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalDeleteUser()" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button onclick="deleteUser()" type="button" class="btn btn-danger">Si</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal reset user-->
+  <div class="modal fade" id="resetUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Reset Password</h5>
+          <button onclick="hideModalResetUser()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputResetUser" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">password :</span>
+            <input id="inputResetPassword" type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          * Remplaza el password por uno nuevo. (No se puede recuperar el antiguo password)
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalResetUser()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button onclick="resetUser()" type="button" class="btn btn-danger">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal rol-->
+  <div class="modal fade" id="rolModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Crear nuevo rol</h5>
+          <button onclick="hideModalRol()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputRol" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <!-- <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">password :</span>
+            <input id="inputPassword" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div> -->
+          Toda actividad queda registrada en el sistema.
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalRol()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="createRol()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal edit rol-->
+  <div class="modal fade" id="editRolModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar rol</h5>
+          <button onclick="hideModalEditRol()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputEditRol" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <div class="form-group">
+                <label>Permisos Asignados</label>
+                <select multiple class="form-control" id="selectEditRol1">
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <!-- <button id = "" type="button" name="button"><<</button> -->
+              <button id="buttonAddPermission" type="button" name="button"><</button>
+              <button id="buttonQuitPermission" type="button" name="button">></button>
+              <!-- <button type="button" name="button">>></button> -->
+            </div>
+            <div class="col-5">
+              <div class="form-group">
+                <label>Lista de permisos</label>
+                <select multiple class="form-control" id="selectEditRol2">
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalEditRol()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="buttonSaveEditRol()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal edit user roles-->
+  <div class="modal fade" id="editUserRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar rol de usuario</h5>
+          <button onclick="hideModalEditUserRole()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre :</span>
+            <input id="inputEditUserRole" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <div class="form-group">
+                <label>Roles Asignados</label>
+                <select multiple class="form-control" id="selectEditUserRole1">
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <!-- <button id = "" type="button" name="button"><<</button> -->
+              <button id="buttonAddRole" type="button" name="button"><</button>
+              <button id="buttonQuitRole" type="button" name="button">></button>
+              <!-- <button type="button" name="button">>></button> -->
+            </div>
+            <div class="col-5">
+              <div class="form-group">
+                <label>Lista de permisos</label>
+                <select multiple class="form-control" id="selectEditUserRole2">
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalEditUserRole()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="buttonSaveEditUserRole()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- modal inventory -->
+  <div class="modal fade" id="inventoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Inventario</h5>
+          <button onclick="hideModalInventory()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="displayReportBody" style="display:block">
+            <div class="row">
+              <!-- <div class="col-3">
+                <span class="input-group-text" id="basic-addon1">Descripcion</span>
+
+              </div> -->
+              <div class="col-6">
+                <span class="input-group-text" id="basic-addon1">Equipado</span>
+
+              </div>
+              <div class="col-6">
+                <span class="input-group-text" id="basic-addon1">Almacen</span>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-3">
+                <div class="" id="inventoryDecription">
+
+                </div>
+              </div> -->
+              <div class="col-6">
+                <div class="" id="inventoryBackpack">
+
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="" id="inventoryChest">
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="table-responsive">
+                <!-- <table id="reportTable" class="display" width="100%"></table> -->
+              </div>
+            </div>
+            <!-- Luego de presionar recuperar espere unos segundos porfavor. -->
+          </div>
+          <div id="displayReportLoad" style="display:none">
+            <td>
+              <img src="../images/loading.gif" align="center" WIDTH=100 HEIGHT=100>
+            </td>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="displayReportButton" style="display:block">
+            <button onclick="hideModalInventory()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal report-->
+  <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reporte de tramas</h5>
+          <button onclick="hideModalReport()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="displayReportBody" style="display:block">
+            <div class="row">
+              <div class="col-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">IMEI :</span>
+                  <input id="inputReportImei" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Placa :</span>
+                  <input id="inputReportPlaca" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" disabled>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Rango :</span>
+                  <input id="inputReportDate" type="text" name="datetimes" />
+                </div>
+              </div>
+              <div class="col-2">
+                <button onclick="reportImei()" type="button" class="btn btn-primary">Buscar</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="table-responsive">
+                <table id="reportTable" class="display" width="100%"></table>
+              </div>
+            </div>
+            <!-- Luego de presionar recuperar espere unos segundos porfavor. -->
+          </div>
+          <div id="displayReportLoad" style="display:none">
+            <td>
+              <img src="../images/loading.gif" align="center" WIDTH=100 HEIGHT=100>
+            </td>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="displayReportButton" style="display:block">
+            <button onclick="hideModalReport()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal term-->
+  <div class="modal fade" id="termModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Terminal</h5>
+          <button onclick="hideModalTerm()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="displayReportBody" style="display:block">
+            <div class="row">
+              <div class="col-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">IMEI :</span>
+                  <input id="inputTermImei" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" disabled>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Placa :</span>
+                  <input id="inputTermPlaca" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" disabled>
+                </div>
+              </div>
+              <!-- <div class="col-4">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Rango :</span>
+                  <input id="inputReportDate" type="text" name="datetimes" />
+                </div>
+              </div> -->
+              <!-- <div class="col-2">
+                <button onclick="termImei()" type="button" class="btn btn-primary">Enviar</button>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive">
+                  <div id="terminalUp" class="display" width="100%"></div>
+                </div>
+              </div>
+              <!-- <div class="col-6">
+                <div class="table-responsive">
+                  <div id="terminalDown" class="display" width="100%"></div>
+                </div>
+              </div> -->
+            </div>
+            <!-- Luego de presionar recuperar espere unos segundos porfavor. -->
+          </div>
+          <div id="displayReportLoad" style="display:none">
+            <td>
+              <img src="../images/loading.gif" align="center" WIDTH=100 HEIGHT=100>
+            </td>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="displayReportButton" style="display:block">
+            <button onclick="hideModalTerm()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal image -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Item</h5>
+          <button onclick="hideModalImage()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="" id="imageInventory" >
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalImage()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal enviar -->
+  <div class="modal fade" id="enviarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enviar Item</h5>
+          <button onclick="hideModalEnviar()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span class="input-group-text" id="basic-addon1">Destinatario :</span>
+          <select class="form-control" id="selectDestinoEnviar">
+
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalEnviar()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" onclick="submitEnviar()" class="btn btn-primary">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal comprar -->
+  <div class="modal fade" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shoppingModalLabel">Comprar Item</h5>
+          <button onclick="hideModalShopping()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Tipo :</span>
+              <select class="form-control" id="selectShoppingType">
+                <option value="0">Dinero</option>
+                <option value="1">Objeto</option>
+                <option value="2">Equipo</option>
+                <option value="3">Conjuro</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" id="shoppingInventoryTable">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+              <div class="card-header">Objeto</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+              <div class="card-header">Equipo</div>
+              <div class="card-body">
+                <h5 class="card-title">Secondary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+              <div class="card-header">Conjuro</div>
+              <div class="card-body">
+                <h5 class="card-title">Success card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="hideModalShopping()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <!-- <button type="button" onclick="submit()" class="btn btn-primary">Enviar</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+      <!-- <script src=".../assets/dist/js/bootstrap.bundle.min.js"></script> -->
+      <script src="../node_modules/socket.io/client-dist/socket.io.js"></script>
+      <script src="../plugins/jquery3.5.1/jquery3.5.1.js"></script>
+      <script src="../plugins/toast/jquery.toast.min.js"></script>
+      <script src="../node_modules/moment/moment.js"></script>
+      <script src="../node_modules/phaser/dist/phaser.js"></script>
+      <script src="../plugins/daterangepicker.min.js"></script>
+      <!-- <script src="../node_modules/daterangepicker/daterangepicker.js"></script> -->
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+      <script src="../plugins/datatables.min.js"></script>
+      <script src="../plugins/datatables.buttons.min.js"></script>
+      <script src="../plugins/jszip.min.js"></script>
+      <script src="../plugins/pdfmake.min.js"></script>
+      <script src="../plugins/vfs_fonts.js"></script>
+      <script src="../plugins/buttons.html5.min.js"></script>
+      <script src="../plugins/buttons.print.min.js"></script>
+
+      <!-- https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/
+      https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/
+      https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js
+      https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js
+      https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js -->
+
+      <script src="../plugins/bootstrap/5.1/js/bootstrap.min.js"></script>
+      <script src="../plugins/chart.js/Chart.min.js"></script>
+
+      <script src="../js/client/home.js"></script>
+      <!-- <script src="../js/client/panel.js"></script> -->
+      <!-- <script src="../js/client/game.js"></script> -->
+      <!-- <script src="../js/client/item.js"></script> -->
+      <script src="../js/client/avatar.js"></script>
+      <!-- <script src="../js/client/inventory.js"></script> -->
+      <!-- <%if(user.permissions.indexOf('ver_unidades')>=0){%> -->
+      <!-- <script src="../js/client/vehicle.js"></script> -->
+      <!-- <%}%> -->
+      <script src="../js/client/client.js"></script>
+      <!-- <script src="../js/client/mapa6/main.js" type='module'></script> -->
+      <!-- <%if(user.permissions.indexOf('ver_estado_de_servidor')>=0){%> -->
+      <!-- <script src="../js/client/setting.js"></script> -->
+      <!-- <%}%> -->
+      <%if(user.permissions.indexOf('admin_users')>=0){%>
+      <!-- <script src="../js/client/user.js"></script> -->
+      <%}%>
+      <!-- <%if(user.permissions.indexOf('ver_terminal')>=0){%> -->
+      <!-- <script src="../js/client/terminal.js"></script> -->
+      <!-- <%}%> -->
+      <%if(user.permissions.indexOf('admin_users')>=0){%>
+      <!-- <script src="../js/client/role.js"></script> -->
+      <%}%>
+      <!-- <%if(user.permissions.indexOf('ver_historial_del_sistema')>=0){%> -->
+      <!-- <script src="../js/client/history.js"></script> -->
+      <!-- <%}%> -->
+      <!-- <script src="../js/client/appfisca.js"></script>
+      <script src="../js/client/monitoreo.js"></script>
+      <script src="../js/client/migration.js"></script> -->
+      <!-- <script src="../js/client/permission.js"></script> -->
+    </body>
+  </html>

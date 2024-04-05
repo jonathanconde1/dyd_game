@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DND | Register</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="./plugins/bootstrap/5.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../plugins/toast/jquery.toast.min.css" />
+  <!-- <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html">Nuevo usuario</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Complate tus datos</p>
+      <% if (hasMessages) { %>
+			<section class="messages">
+				<% messages.forEach(function(message) { %>
+				<p><%= message %></p>
+				<% }); %>
+			</section>
+			<% } %>
+      <form id="register_form" action="/register_user" method="post">
+        <div class="input-group mb-3">
+          <input id="name" name="name" type="text" class="form-control" placeholder="Usuario">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <!-- <i class="fa-thin fa-user"></i> -->
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input id="password" name="password" type="password" class="form-control" placeholder="Clave">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input id="password_repeat" name="password_repeat" type="password" class="form-control" placeholder="Repira la clave">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Recordar
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <!-- <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+          </div> -->
+          <!-- /.col -->
+        </div>
+        <input id="csrfToken" type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" name="button" value="Inicial sesion" class="btn btn-block btn-primary"><i class="fas fa-share"></i> Crear cuenta</button>
+      </form>
+
+      <div class="social-auth-links text-center mb-3">
+        <!-- <a href="#" class="btn btn-block btn-primary">
+          <i class="fas fa-share"></i> Iniciar Sesion
+        </a> -->
+
+      </div>
+      <!-- /.social-auth-links -->
+
+      <!-- <p class="mb-1">
+        <a href="forgot-password.html">Olvide la clave</a>
+      </p> -->
+      <p class="mb-0">
+        <a href="login" class="text-center">ir a login para iniciar</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<!-- <script src="../../plugins/jquery/jquery.min.js"></script> -->
+<script src="./plugins/jquery3.5.1/jquery3.5.1.js"></script>
+<script src="../plugins/toast/jquery.toast.min.js"></script>
+<!-- Bootstrap 4 -->
+<!-- <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<script src="./plugins/bootstrap/5.1/js/bootstrap.min.js"></script>
+<script src="../app/client/system/user.js"></script>
+<!-- AdminLTE App -->
+<!-- <script src="/js/adminlte.min.js"></script> -->
+</body>
+</html>

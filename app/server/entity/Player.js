@@ -3,7 +3,7 @@ const Entity = require('./Entity.js').Entity;
 class Player extends Entity {
   constructor(id, name){
     super(id);
-    this.name
+    this.name = name;
   }
 
   getName(){
