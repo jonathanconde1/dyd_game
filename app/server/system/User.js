@@ -7,13 +7,15 @@ const User = {};
 module.exports.User = User;
 
 User.create = (data, response) => {
-  console.log("data user",data.name);
-  console.log("conexion",conexion);
-  // console
+
   password = bcrypt.hashSync(data.password, 10);
-  var clientLocal = new Client(conexion.local);
-  clientLocal.connect();
-  clientLocal.query("INSERT INTO users (name, password) VALUES ('"+data.name+"','"+password+"')",function(err,res){
+  let clientpg = new Client(conexion.local);
+
+  let query = this.createQuery(data.name, password);
+
+  clientpg.connect();
+
+  clientpg.query(query,function(err,res){
     if(err){
       console.log("err insert",err);
       response.status(400).send({
@@ -30,6 +32,13 @@ User.create = (data, response) => {
         data: {name:data.name},
       });
     }
-    clientLocal.end();
+    clientpg.end();
   });
+}
+
+User.createValidation = function(name){
+  client
+}
+User.createQuery = function(name,password){
+  return "INSERT INTO users (name, password) VALUES ('"+name+"','"+password+"')";
 }

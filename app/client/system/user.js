@@ -21,29 +21,25 @@ $(document).ready(function(){
       success:(json) => {
         console.log('exito',json);
         console.log('success',json.success);
-
             // hideModalUser();
             // listUsers();
-            $.toast({
-              heading: 'Exito',
-              text: json.message,
-              showHideTransition: 'slide',
-              position: 'bottom-right',
-              icon: 'success'
-            })
-            
+            emitInfo('Exito','success',json.message);
 
       },
       error:(xhr,status) => {
-        $.toast({
-            heading: 'Error',
-            text: xhr.responseJSON.message,
-            showHideTransition: 'slide',
-            position: 'bottom-right',
-            icon: 'info'
-        })
+        emitInfo('Error','info',xhr.responseJSON.message);
       }
     });
+  }
+
+  function emitInfo(title,type,msn){
+    $.toast({
+        heading: title,
+        text: msn,
+        showHideTransition: 'slide',
+        position: 'bottom-right',
+        icon: type
+    })
   }
 
 });
