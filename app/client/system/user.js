@@ -21,9 +21,14 @@ $(document).ready(function(){
       success:(json) => {
         console.log('exito',json);
         console.log('success',json.success);
+        if(json.success){
+            emitInfo('Exito','success',json.message);
+        }else{
+            emitInfo('Peligro','warning',json.message);
+        }
             // hideModalUser();
             // listUsers();
-            emitInfo('Exito','success',json.message);
+
 
       },
       error:(xhr,status) => {

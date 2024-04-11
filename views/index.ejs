@@ -315,7 +315,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Creando Personaje</h5>
-          <button onclick="hideModalCreatePersonaje()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button onclick="hideModalCreateAvatar()" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -354,8 +354,8 @@
           El resto de datos se llenaran conforme a las fichas de personaje.
         </div>
         <div class="modal-footer">
-          <button onclick="hideModalCreatePersonaje()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button onclick="createPersonajeSubmit()" type="button" class="btn btn-primary">Guardar</button>
+          <button onclick="hideModalCreateAvatar()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button onclick="createAvatarSubmit()" type="button" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </div>
@@ -1198,16 +1198,17 @@
       <script src="../plugins/bootstrap/5.1/js/bootstrap.min.js"></script>
       <script src="../plugins/chart.js/Chart.min.js"></script>
 
-      <script src="../js/client/home.js"></script>
+      <script src="../app/client/system/user.js"></script>
+      <script src="../app/client/system/avatar.js"></script>
       <!-- <script src="../js/client/panel.js"></script> -->
       <!-- <script src="../js/client/game.js"></script> -->
       <!-- <script src="../js/client/item.js"></script> -->
-      <script src="../js/client/avatar.js"></script>
+      <!-- <script src="../app/client/avatar.js"></script> -->
       <!-- <script src="../js/client/inventory.js"></script> -->
       <!-- <%if(user.permissions.indexOf('ver_unidades')>=0){%> -->
       <!-- <script src="../js/client/vehicle.js"></script> -->
       <!-- <%}%> -->
-      <script src="../js/client/client.js"></script>
+      <!-- <script src="../js/client/client.js"></script> -->
       <!-- <script src="../js/client/mapa6/main.js" type='module'></script> -->
       <!-- <%if(user.permissions.indexOf('ver_estado_de_servidor')>=0){%> -->
       <!-- <script src="../js/client/setting.js"></script> -->
