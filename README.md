@@ -44,3 +44,21 @@ rules:
 - habilidades pasivas
 - ataques
 - items
+
+
+## api keyboard
+# para crear key
+284  ssh-keygen -t ed25519 -C "jonathanconde1@gmail.com"
+285  eval "$(ssh-agent -s)"
+286  ls -al ~/.ssh
+
+# copiar key
+288  cd ~/.shh
+290  cat ~/.ssh/id_github.pub
+
+#iniciar agent ssh
+291  eval "$(ssh-agent -s)"
+#agregar key al agente
+292  ssh-add ~/.ssh/id_github
+
+# find
