@@ -6,7 +6,7 @@ const { Client } = require('pg');
 
 //const agentServer = require('../js/server/AgentServer.js').AgentServer;
 const conexion = require('../database/Conexion.js').Conexion;
-const user = require('../system/User.js').User;
+const user = require('../system/User').User;
 //const report = require('../js/server/Report.js').Report;
 // const history = require('../js/server/History.js').History;
 

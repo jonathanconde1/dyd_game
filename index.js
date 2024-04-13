@@ -13,6 +13,7 @@ const passport = require('passport');
 const quickselect = require('quickselect'); // Used to compute the median for latency
 // const routesAuth = require('./routes/auth.js'):
 const routesAuth = require('./app/server/routes/auth.js');
+const routesAvatar = require('./app/server/routes/avatar.js');
 
 const GameServer = require('./app/server/system/GameServer.js').GameServer;
 
@@ -69,6 +70,7 @@ app.use('/app',express.static(__dirname + '/app'));
 app.use('/assets',express.static(__dirname + '/assets'));
 
 app.use('/',routesAuth);
+app.use('/',routesAvatar);
 
 server.listen(process.env.SOCKET_PORT,()=>{
   console.log('Escuchando en '+server.address().port);

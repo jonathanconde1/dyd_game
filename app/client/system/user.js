@@ -22,9 +22,9 @@ $(document).ready(function(){
         console.log('exito',json);
         console.log('success',json.success);
         if(json.success){
-            emitInfo('Exito','success',json.message);
+            info.emitInfo('Exito','success',json.message);
         }else{
-            emitInfo('Peligro','warning',json.message);
+            info.emitInfo('Peligroddd','warning',json.message);
         }
             // hideModalUser();
             // listUsers();
@@ -35,16 +35,6 @@ $(document).ready(function(){
         emitInfo('Error','info',xhr.responseJSON.message);
       }
     });
-  }
-
-  function emitInfo(title,type,msn){
-    $.toast({
-        heading: title,
-        text: msn,
-        showHideTransition: 'slide',
-        position: 'bottom-right',
-        icon: type
-    })
   }
 
 });
