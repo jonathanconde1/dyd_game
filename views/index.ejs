@@ -76,34 +76,37 @@
         </ul>
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-avatar" role="tabpanel" aria-labelledby="pills-avatar-tab">
-            <p align="center"><strong>SELECCIONE UN AVATAR</strong></p>
-            <div class="table-responsive">
-              <table id="avatarsTable" class="display" width="100%"></table>
-            </div>
-
-
             <section class="content">
               <div class="container-fluid">
                 <div class="d-grid gap-2">
                   <!-- <button type="button" id="crear_personaje" class="btn btn-primary btn-sm">Crear personaje</button> -->
-                  <button onclick="createPersonaje()" class="btn btn-primary" >
+                  <button id="buttonCreateAvatar" class="btn btn-primary" >
                     <span data-feather="home"></span>
                     Crear avatar
                   </button>
-                  <div class="navbar-nav">
+                  <button id="buttonCloseSession" class="btn btn-primary" >
+                    <span data-feather="home"></span>
+                    cerra session
+                  </button>
+                  <input id="csrf_token" type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <!-- <div class="navbar-nav">
                     <div class="nav-item text-nowrap">
                       <form action="/logout" method="post">
                         <button class="btn btn-primary" type="submit">Cerra session</button>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                       </form>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
-
-
-
               </div>
             </section>
+            <p align="center"><strong>SELECCIONE UN AVATAR</strong></p>
+            <div class="table-responsive">
+              <table id="avatarsTable" class="display" width="100%"></table>
+            </div>
+
+
+
           </div>
           <div class="tab-pane fade" id="pills-mapa" role="tabmapa" aria-labelledby="pills-mapa-tab">
             <div id="avatar" class="">

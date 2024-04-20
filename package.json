@@ -39,6 +39,7 @@
     "phaser": "^3.80.1",
     "pluralize": "^8.0.0",
     "quickselect": "^1.0.0",
+    "simple-json-db": "^2.0.0",
     "socket.io": "^4.6.1"
   },
   "devDependencies": {

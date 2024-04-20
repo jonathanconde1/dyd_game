@@ -1,6 +1,7 @@
 $(document).ready(function(){
   console.log("load avatars ...");
-  let usersTable = $("#avatarsTable").DataTable({
+  let table = $("#avatarsTable").DataTable({
+    searching: false,
     bSort: false,
     aoColumns:[
       { sWidth: "2%" },
@@ -10,13 +11,31 @@ $(document).ready(function(){
 
     ]
   });
-
   listAvatars();
 
+  $('#buttonCreateAvatar').click(function(){
+    console.log('click button avatars ...');
+  });
+  $('#buttonCloseSession').click(function(){
+    closeSession();
+  });
 
 });
 
-
+function closeSession(){
+  let csrfToken =$('#csrf_token').val();
+  $.post('/logout', { _csrf: csrfToken })
+   .done(function(response) {
+       // Manejar la respuesta del servidor si es necesario
+       console.log('Sesión cerrada exitosamente');
+       window.location.href = '/login';
+       // Puedes redirigir o realizar otras acciones según la respuesta
+   })
+   .fail(function(xhr, status, error) {
+       // Manejar errores si la solicitud falla
+       console.error('Error al cerrar sesión:', error);
+   });
+}
 function listAvatars (){
   $.ajax({
       url:'/avatar_all',
@@ -51,14 +70,15 @@ function listAvatars (){
 function drawAvatarsTable(data){
  console.log("draw avatars",data);
  let table = $('#avatarsTable').DataTable();
+ // table.clear().draw();
  table.destroy();
+ // $('.placeholder input[type="search"]').val('');
+
  table = $('#avatarsTable').DataTable({
-   search:{
-    "search": " "
-  },
+   searching: false,
    data:data,
    initComplete:function(){
-     // loadUserHasRoles();
+     console.log("avatars cargados con exito ...");
    },
    aoColumns:[
      {
@@ -81,7 +101,7 @@ function drawAvatarsTable(data){
        }
      },
      {
-       title:'status',
+       title:'Option',
        render: function(data, type, full, meta){
          console.log("full",full);
          let status = '<button onclick="startPlayer('+full['user_id']+','+full['id']+')" type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="false">PLAY</button>';
@@ -98,4 +118,11 @@ function drawAvatarsTable(data){
    ]
 
  });
+ table.search('');
+ // $('.dataTables_filter input[type="search"]').val('');
+ // $('.placeholder input[type="search"]').val('');
+}
+
+function clearData(table){
+  table.search('');
 }
