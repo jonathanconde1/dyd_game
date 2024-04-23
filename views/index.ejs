@@ -72,6 +72,9 @@
           <li class="nav-item" role="game">
             <button class="nav-link" id="pills-game-tab" data-bs-toggle="pill" data-bs-target="#pills-game" type="button" role="tab" aria-controls="pills-game" aria-selected="false">Game</button>
           </li>
+          <li class="nav-item" role="game">
+            <button class="nav-link" id="pills-new-avatar-tab" data-bs-toggle="pill" data-bs-target="#pills-new-avatar" type="button" role="tab" aria-controls="pills-game" aria-selected="false">Crear Avatar</button>
+          </li>
 
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -165,6 +168,40 @@
             <%}%> -->
 
 
+
+          </div>
+          <div class="tab-pane fade" id="pills-new-avatar" role="tabpanel" aria-labelledby="pills-new-avatar-tab">
+            <h5 class="modal-title" id="exampleModalLabel">Creando Personaje</h5>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Nombre :</span>
+              <input id="inputAvatarName" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Clase :</span>
+              <select id="selectAvatarClase" class="form-control" aria-label="Default select example">
+                <option value="guerrero">Guerrero</option>
+                <option value="clerigo">clerigo</option>
+                <option value="picaro">picaro</option>
+                <option value="mago">mago</option>
+                <option value="explorador">explorador</option>
+                <%if(user.permissions.indexOf('admin_users')>=0){%>
+                  <option value="la hechicera">la hechicera</option>
+                  <option value="el dragon">el dragon</option>
+                  <option value="el caballero">el caballero</option>
+                  <option value="maton">maton</option>
+                  <option value="sectario">sectario</option>
+                  <option value="sectariofanatico">sectariofanatico</option>
+                  <option value="elementalfuego">elementalfuego</option>
+                  <option value="Ladron de suenos">Ladron de suenos</option>
+                  <option value="Vilena piesligeros">Vilena piesligeros</option>
+                  <option value="Gnoll">Gnoll</option>
+                  <option value="Gnoll lider">Gnoll lider</option>
+                  <option value="Gnoll colmillo de yeenoghu">Gnoll colmillo de yeenoghu</option>
+                <%}%>
+              </select>
+            </div>
 
           </div>
 

@@ -18,9 +18,10 @@ const db = new  JSONdb ( './app/server/database/template_avatar.json' );
 
 let avatars = [
   {
+    user_id:1,
     name:'',
     slots:5,
-    image:'humano-picaro.png',
+    image:'humano-guerrero.png',
     race:'humano',
     class:'guerrero',
     level:1,
@@ -78,72 +79,100 @@ let avatars = [
     attributes_default:[
       'tomar aliento',
       'estilo de combate',
-      'posicion'
-    ]
+      'posición de privilegio'
+    ],
+
+    // attacks:[
+    //   "hacha de dos manos",
+    //   "jabalina"
+    // ],
+
+    equipment:[
+      'cota de malla',
+      'hacha de dos manos',
+      'jabalina',
+      'jabalina',
+      'jabalina',
+      'mochila',
+      'manta',
+      'yesquero',
+      'racion',
+      'racion',
+      'cantinflora',
+      'una muda de ropa de calidad',
+      'anillo de sellar',
+      'documento que acredita el linaje',
+    ],
+
+    competencies:'Todas las armaduras,'
+    +'escudos, armas sencillas, armas marciales,'
+    +'naipes.',
+
+    language:['común','dracónico','enano']
 
   },
   {
+    user_id:1,
     name:'',
     slots:5,
-    image:'humano-picaro.png',
-    race:'humano',
-    class:'guerrero',
+    image:'enano-clerigo.png',
+    race:'enano',
+    class:'clerigo',
     nivel:1,
-    background: 'noble',
-    alignment: 'legal neutral',
+    background: 'soldado',
+    alignment: 'neutral bueno',
     experience_points:0,
 
-    force: +3,
+    force: +2,
     skill: -1,
     constitution: +2,
     intelligence: +0,
-    wisdom: +1,
-    charisma: +2,
+    wisdom: +3,
+    charisma: +1,
 
     inspiration: 0,
     competition_bonus: +2,
 
-    salvation_force: +5,
+    salvation_force: +2,
     salvation_skill: -1,
-    salvation_constitution: +4,
+    salvation_constitution: +2,
     salvation_intelligence: +0,
-    salvation_wisdom: +1,
-    salvation_charisma: +2,
+    salvation_wisdom: +5,
+    salvation_charisma: +3,
 
-    armor:17,
+    armor:18,
     initiative: -1,
-    speed:30,
+    speed:25,
 
-    hit_points_max: 12,
-    hit_points:12,
+    hit_points_max: 11,
+    hit_points:11,
     temp_hit_points:0,
 
     salvation_success:0,
     salvation_failed:0,
     status: true,
 
-    personality_traits: 'Mis halagos hacen sentirse importantes y'
-    +'maravillosos a aquellos con los que hablo.'
-    +'Además, no me gusta ensuciarme. Bajo'
-    +'ningún concepto me alojaré en dependencias'
-    +'inapropiadas a mi alcurnia.',
+    personality_traits: 'Siempre soy educado y respetuoso. Además,'
+    +'no confío en mis instintos, así que suelo'
+    +'esperar a que otros actúen primero.',
 
-    ideals: 'Responsabilidad. Los nobles deben proteger'
-    +'al pueblo llano, no abusar de ellos.',
+    ideals: 'Respeto. La gente merece ser tratada con'
+    +'dignidad y cortesía.',
 
-    links:'Mi hacha a dos manos es una herencia'
-    +'familiar. Se trata, con mucho, de mi posesión'
-    +'más preciada.',
+    links:'Tengo tres primos: Gundren, Tharden y'
+    +'Nundro Rockseeker. Son miembros de mi'
+    +'clan y buenos amigos.',
 
-    defects:'Me cuesta resistirme a la tentación de las'
-    +'riquezas, especialmente el oro. Una gran'
-    +'fortuna podría ayudarme a restaurar mi'
-    +'legado.',
+    defects:'Dudo en secreto de si los dioses realmente se'
+    +'preocupan por los asuntos de los mortales.',
 
     attributes_default:[
-      'tomar aliento',
-      'estilo de combate',
-      'posicion'
+      'aptitud magica',
+      'discipulo de la vida',
+      'vision en la oscuridad',
+      'resistencia enana',
+      'aguante enano',
+      'sargento mercenario'
     ]
 
   }
@@ -152,6 +181,7 @@ let avatars = [
 //nota: [atribute || consumible ]
 let items = [
   {
+    user_id:1,
     code:0,
     name:'tomar aliento',
     description: 'Tienes una pequeña reserva'
