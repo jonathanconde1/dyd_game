@@ -164,49 +164,37 @@ function drawViewTemplate(data){
   $("#p_links").append("<strong>Vínculos: </strong>"+data.links);
   $("#p_defects").append("<strong>Defectos: </strong>"+data.defects);
 
+  let attributes = data.attributes_default;
+  $("#ul_attributes_default").html("");
+  for (var i in attributes) {
+    $("#ul_attributes_default").append("<li>"+attributes[i]+"</li>");
+  }
+  //equipment
+  let equipment = data.equipment;
+  $("#ul_equipment").html("");
+  for (var i in equipment) {
+    $("#ul_equipment").append("<li>"+equipment[i]+"</li>");
+  }
+
+  $("#p_competencies").html("");
+  $("#p_competencies").append("<strong>Competencias: </strong>"+data.competencies);
+
+  $("#p_language").html("");
+  let languajes = data.language;
+  let aux = "";
+  for (var j in languajes) {
+    if(j>0) aux = aux+", ";
+    aux = aux+languajes[j];
+  }
+  $("#p_language").append("<strong>Idiomas: </strong>"+data.language);
 
   /*
-  alignment:"legal neutral"
-armor:17
-attributes_default:(3) ['tomar aliento', 'estilo de combate', 'posición de privilegio']
-background:"noble"
-charisma:2
-class:"guerrero"
-competencies:"Todas las armaduras,escudos, armas sencillas, armas marciales,naipes."
-competition_bonus:2
-constitution:2
-defects:"Me cuesta resistirme a la tentación de lasriquezas, especialmente el oro. Una granfortuna podría ayudarme a restaurar milegado."
-equipment:(14) ['cota de malla', 'hacha de dos manos', 'jabalina', 'jabalina', 'jabalina', 'mochila', 'manta', 'yesquero', 'racion', 'racion', 'cantinflora', 'una muda de ropa de calidad', 'anillo de sellar', 'documento que acredita el linaje']
-experience_points:0
-force:3
-hit_points:12
-hit_points_max:12
-ideals:"Responsabilidad. Los nobles deben protegeral pueblo llano, no abusar de ellos."
-image:"humano-guerrero.png"
-initiative:-1
-inspiration:0
-intelligence:0
-language:(3) ['común', 'dracónico', 'enano']
-level:1
-links:"Mi hacha a dos manos es una herenciafamiliar. Se trata, con mucho, de mi posesiónmás preciada."
-name:""
-personality_traits:"Mis halagos hacen sentirse importantes ymaravillosos a aquellos con los que hablo.Además, no me gusta ensuciarme. Bajoningún concepto me alojaré en dependenciasinapropiadas a mi alcurnia."
-race:"humano"
-salvation_charisma:2
-salvation_constitution:4
-salvation_failed:0
-salvation_force:5
-salvation_intelligence:0
-salvation_skill:-1
-salvation_success:0
-salvation_wisdom:1
-skill:-1
-slots:5
-speed:30
-status:true
-temp_hit_points:0
-user_id:1
-wisdom:1
+  "competencies": "Todas las armaduras,escudos, armas sencillas, armas marciales,naipes.",
+  "language": [
+      "común",
+      "dracónico",
+      "enano"
+  ]
   */
 
 }

@@ -116,22 +116,22 @@ let avatars = [
     salvation_failed:0,
     status: true,
 
-    personality_traits: 'Mis halagos hacen sentirse importantes y'
-    +'maravillosos a aquellos con los que hablo.'
-    +'Además, no me gusta ensuciarme. Bajo'
-    +'ningún concepto me alojaré en dependencias'
+    personality_traits: 'Mis halagos hacen sentirse importantes y '
+    +'maravillosos a aquellos con los que hablo. '
+    +'Además, no me gusta ensuciarme. Bajo '
+    +'ningún concepto me alojaré en dependencias '
     +'inapropiadas a mi alcurnia.',
 
-    ideals: 'Responsabilidad. Los nobles deben proteger'
+    ideals: 'Responsabilidad. Los nobles deben proteger '
     +'al pueblo llano, no abusar de ellos.',
 
-    links:'Mi hacha a dos manos es una herencia'
-    +'familiar. Se trata, con mucho, de mi posesión'
+    links:'Mi hacha a dos manos es una herencia '
+    +'familiar. Se trata, con mucho, de mi posesión '
     +'más preciada.',
 
-    defects:'Me cuesta resistirme a la tentación de las'
-    +'riquezas, especialmente el oro. Una gran'
-    +'fortuna podría ayudarme a restaurar mi'
+    defects:'Me cuesta resistirme a la tentación de las '
+    +'riquezas, especialmente el oro. Una gran '
+    +'fortuna podría ayudarme a restaurar mi '
     +'legado.',
 
     attributes_default:[
@@ -176,7 +176,7 @@ let avatars = [
     image:'enano-clerigo.png',
     race:'enano',
     class:'clerigo',
-    nivel:1,
+    level:1,
     background: 'soldado',
     alignment: 'neutral bueno',
     experience_points:0,
@@ -210,19 +210,19 @@ let avatars = [
     salvation_failed:0,
     status: true,
 
-    personality_traits: 'Siempre soy educado y respetuoso. Además,'
-    +'no confío en mis instintos, así que suelo'
+    personality_traits: 'Siempre soy educado y respetuoso. Además, '
+    +'no confío en mis instintos, así que suelo '
     +'esperar a que otros actúen primero.',
 
-    ideals: 'Respeto. La gente merece ser tratada con'
+    ideals: 'Respeto. La gente merece ser tratada con '
     +'dignidad y cortesía.',
 
-    links:'Tengo tres primos: Gundren, Tharden y'
-    +'Nundro Rockseeker. Son miembros de mi'
+    links:'Tengo tres primos: Gundren, Tharden y '
+    +'Nundro Rockseeker. Son miembros de mi '
     +'clan y buenos amigos.',
 
-    defects:'Dudo en secreto de si los dioses realmente se'
-    +'preocupan por los asuntos de los mortales.',
+    defects:'Dudo en secreto de si los dioses realmente se '
+    +' preocupan por los asuntos de los mortales.',
 
     attributes_default:[
       'aptitud magica',
@@ -231,7 +231,38 @@ let avatars = [
       'resistencia enana',
       'aguante enano',
       'sargento mercenario'
-    ]
+    ],
+    equipment:[
+      'cota de malla',
+      'escudo',
+      'martillo de guerra',
+      'dos hachas de mano',
+      'simbolo sagrado',
+      'mochila',
+      'palanqueta',
+      'martillo',
+      '10 pitones',
+      '10 antorchas',
+      'yesquero',
+      'raciones para 10 dias',
+      'cantinflora',
+      '50 pies de cuerda de cáñamo',
+      'herramientas de albañil',
+      'una daga de un enemigo caído tomada como trofeo',
+      'naipes',
+      'una muda de ropas comunes',
+      'bolsa',
+      'insignia de rango (sargento)'
+    ],
+
+    competencies:'Todas las armaduras y '
+    +'escudos, todas las armas sencillas, hachas '
+    +'de guerra, hachas de mano, martillos ligeros, '
+    +'martillos de guerra, naipes, herramientas de '
+    +'albañil y vehículos terrestres.',
+
+    language:['común','enano']
+
 
   }
 ];
