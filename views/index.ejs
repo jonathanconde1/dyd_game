@@ -37,6 +37,21 @@
           }
         }
       </style>
+      <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+  </style>
 
 
       <!-- Custom styles for this template -->
@@ -171,39 +186,117 @@
 
           </div>
           <div class="tab-pane fade" id="pills-new-avatar" role="tabpanel" aria-labelledby="pills-new-avatar-tab">
-            <h5 class="modal-title" id="exampleModalLabel">Creando Personaje</h5>
+            <div class="container">
+              <h5 class="modal-title" id="exampleModalLabel">Creando Personaje</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Nombre :</span>
+                    <input id="inputNameTemplate" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Plantilla :</span>
+                    <select id="selectTemplate" class="form-control" aria-label="Default select example">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button type="" class="btn btn-primary">Crear Ficha</button>
+                </div>
+              </div>
 
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Nombre :</span>
-              <input id="inputAvatarName" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+
+
+
             </div>
 
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">Clase :</span>
-              <select id="selectAvatarClase" class="form-control" aria-label="Default select example">
-                <option value="guerrero">Guerrero</option>
-                <option value="clerigo">clerigo</option>
-                <option value="picaro">picaro</option>
-                <option value="mago">mago</option>
-                <option value="explorador">explorador</option>
-                <%if(user.permissions.indexOf('admin_users')>=0){%>
-                  <option value="la hechicera">la hechicera</option>
-                  <option value="el dragon">el dragon</option>
-                  <option value="el caballero">el caballero</option>
-                  <option value="maton">maton</option>
-                  <option value="sectario">sectario</option>
-                  <option value="sectariofanatico">sectariofanatico</option>
-                  <option value="elementalfuego">elementalfuego</option>
-                  <option value="Ladron de suenos">Ladron de suenos</option>
-                  <option value="Vilena piesligeros">Vilena piesligeros</option>
-                  <option value="Gnoll">Gnoll</option>
-                  <option value="Gnoll lider">Gnoll lider</option>
-                  <option value="Gnoll colmillo de yeenoghu">Gnoll colmillo de yeenoghu</option>
-                <%}%>
-              </select>
-            </div>
+            <div class="container mt-5">
+               <h1 class="text-center">Ficha de Personaje D&D</h1>
+               <div class="row">
+                 <div class="col-md-4">
+                   <h3>Información Básica</h3>
+                   <p id="p_name"><strong>Nombre:</strong> demo</p>
+                   <p id="p_race"><strong>Raza:</strong> humano</p>
+                   <p id="p_class"><strong>Clase:</strong> guerrero</p>
+                   <p id="p_level"><strong>Nivel:</strong> 1</p>
+                   <p id="p_background"><strong>Trasfondo:</strong> noble</p>
+                   <p id="p_alignment"><strong>Alineamiento:</strong> legal neutral</p>
+                   <p id="p_experience_points"><strong>Puntos de Experiencia:</strong> 0</p>
+                   <!-- <p id="p_"><strong>Imagen:</strong></p> -->
+                   <img src="humano-guerrero.png" alt="Imagen de personaje" class="profile-img">
+                 </div>
+                 <div class="col-md-4">
+                   <h3>Atributos</h3>
+                   <p id="p_force"><strong>Fuerza:</strong> 3</p>
+                   <p id="p_skill"><strong>Destreza:</strong> -1</p>
+                   <p id="p_constitucion"><strong>Constitución:</strong> 2</p>
+                   <p id="p_intelligence"><strong>Inteligencia:</strong> 0</p>
+                   <p id="p_wisdom"><strong>Sabiduría:</strong> 1</p>
+                   <p id="p_charisma"><strong>Carisma:</strong> 2</p>
+                   <p id="p_inspiration"><strong>Inspiración:</strong> 0</p>
+                   <p id="p_competition_bonus"><strong>Bonificador de Competición:</strong> 2</p>
+                   <!-- <p id="p_"><strong>Puntos de Salvación:</strong></p> -->
+                   <!-- <ul id="ul_salvation">
+                     <li>Fuerza: 5</li>
+                     <li>Destreza: -1</li>
+                     <li>Constitución: 4</li>
+                     <li>Inteligencia: 0</li>
+                     <li>Sabiduría: 1</li>
+                     <li>Carisma: 2</li>
+                   </ul> -->
+                 </div>
+                 <div class="col-md-4">
+                   <h3>Detalles Adicionales</h3>
+                   <p id="p_armor"><strong>Armadura:</strong> 17</p>
+                   <p id="p_initiative"><strong>Iniciativa:</strong> -1</p>
+                   <p id="p_speed"><strong>Velocidad:</strong> 30 pies</p>
+                   <p id="p_hit_points_max"><strong>Puntos de Golpe Máximos:</strong> 12</p>
+                   <p id="p_hit_points"><strong>Puntos de Golpe Actuales:</strong> 12</p>
+                   <p id="p_temp_hit_points"><strong>Puntos de Golpe Temporales:</strong> 0</p>
+                   <p id="p_salvation_success"><strong>Éxito en Salvaciones:</strong> 0</p>
+                   <p id="p_salvation_failed"><strong>Falló en Salvaciones:</strong> 0</p>
+                   <p id="p_status"><strong>Estado:</strong> Activo</p>
+                 </div>
+               </div>
+               <div class="row mt-3">
+                 <div class="col-md-6">
+                   <h3>Personalidad</h3>
+                   <p id="p_personality_traits"><strong>Rasgos de Personalidad:</strong> Mis halagos hacen sentirse importantes y maravillosos a aquellos con los que hablo. Además, no me gusta ensuciarme. Bajo ningún concepto me alojaré en dependencias inapropiadas a mi alcurnia.</p>
+                   <p id="p_ideals"><strong>Ideales:</strong> Responsabilidad. Los nobles deben proteger al pueblo llano, no abusar de ellos.</p>
+                   <p id="p_links"><strong>Vínculos:</strong> Mi hacha a dos manos es una herencia familiar. Se trata, con mucho, de mi posesión más preciada.</p>
+                   <p id="p_defects"><strong>Defectos:</strong> Me cuesta resistirme a la tentación de las riquezas, especialmente el oro. Una gran fortuna podría ayudarme a restaurar mi legado.</p>
+                 </div>
+                 <div class="col-md-6">
+                   <h3>Habilidades y Equipo</h3>
+                   <p><strong>Atributos Predeterminados:</strong></p>
+                   <ul>
+                     <li>Tomar Aliento</li>
+                     <li>Estilo de Combate</li>
+                     <li>Posición de Privilegio</li>
+                   </ul>
+                   <p><strong>Equipo:</strong></p>
+                   <ul>
+                     <li>Cota de Malla</li>
+                     <li>Hacha de Dos Manos</li>
+                     <li>Jabalina x3</li>
+                     <li>Mochila</li>
+                     <li>Manta</li>
+                     <li>Yesquero</li>
+                     <li>Ración x2</li>
+                     <li>Cantinflora</li>
+                     <li>Una muda de ropa de calidad</li>
+                     <li>Anillo de Sellar</li>
+                     <li>Documento que Acredita el Linaje</li>
+                   </ul>
+                   <p><strong>Competencias:</strong> Todas las armaduras, escudos, armas sencillas, armas marciales, naipes.</p>
+                   <p><strong>Idiomas:</strong> Común, Dracónico, Enano</p>
+                 </div>
+               </div>
+               <button type="" class="btn btn-primary">Guardar Ficha</button>
+             </div>
 
-          </div>
 
           <div class="tab-pane fade" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
               <div class="display" width="100%">

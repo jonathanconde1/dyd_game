@@ -20,6 +20,64 @@ let avatars = [
   {
     user_id:1,
     name:'',
+    slots:0,
+    image:'undefined.png',
+    race:'',
+    class:'Seleccione',
+    level:0,
+    background: '',
+    alignment: '',
+    experience_points:0,
+
+    force: 0,
+    skill: 0,
+    constitution: 0,
+    intelligence: +0,
+    wisdom: +0,
+    charisma: +0,
+
+    inspiration: 0,
+    competition_bonus: +0,
+
+    salvation_force: +0,
+    salvation_skill: 0,
+    salvation_constitution: 0,
+    salvation_intelligence:0,
+    salvation_wisdom:0,
+    salvation_charisma:0,
+
+    armor:0,
+    initiative:0,
+    speed:0,
+
+    hit_points_max:0,
+    hit_points:0,
+    temp_hit_points:0,
+
+    salvation_success:0,
+    salvation_failed:0,
+    status:true,
+
+    personality_traits: '',
+
+    ideals: '',
+
+    links:'',
+
+    defects:'',
+
+    attributes_default:[],
+
+    equipment:[],
+
+    competencies:'',
+
+    language:[]
+
+  },
+  {
+    user_id:1,
+    name:'',
     slots:5,
     image:'humano-guerrero.png',
     race:'humano',
@@ -217,38 +275,39 @@ let items = [
       oro: 0,
       experience_points:0
     },
-    {
-      code:1,
-      name:'estilo de combate',
-      description: 'Recibes un'
-      +'+1 a la CA cuando lleves puesta cualquier'
-      +'armadura. Este bonificador ya está incluido en'
-      +'tu CA.(armadura +1)',
-      type:'atribute', // atribute, equip, consumible
-      active:false,
-      action:[],
-      live: 0, // o = para siempre
-      price: 0,
-      // modificadores
-      modifiers: {
-        force: +0,
-        skill: +0,
-        constitution: +0,
-        intelligence: +0,
-        wisdom: +0,
-        charisma: +0,
-        armor:+1,
+  },
+  {
+    code:1,
+    name:'estilo de combate',
+    description: 'Recibes un'
+    +'+1 a la CA cuando lleves puesta cualquier'
+    +'armadura. Este bonificador ya está incluido en'
+    +'tu CA.(armadura +1)',
+    type:'atribute', // atribute, equip, consumible
+    active:false,
+    action:[],
+    live: 0, // o = para siempre
+    price: 0,
+    // modificadores
+    modifiers: {
+      force: +0,
+      skill: +0,
+      constitution: +0,
+      intelligence: +0,
+      wisdom: +0,
+      charisma: +0,
+      armor:+1,
 
-        inspiration: +0,
-        competition_bonus: +0,
+      inspiration: +0,
+      competition_bonus: +0,
 
-        armor:+0,
-        initiative: +0,
-        speed:+0,
-        hit_points:+0,
-        oro: 0,
-        experience_points:0
-      }
+      armor:+0,
+      initiative: +0,
+      speed:+0,
+      hit_points:+0,
+      oro: 0,
+      experience_points:0
+    }
 
   },
   {
