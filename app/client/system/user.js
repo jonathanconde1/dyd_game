@@ -24,7 +24,7 @@ $(document).ready(function(){
         if(json.success){
             info.emitInfo('Exito','success',json.message);
         }else{
-            info.emitInfo('Peligroddd','warning',json.message);
+            info.emitInfo('Peligro','warning',json.message);
         }
             // hideModalUser();
             // listUsers();

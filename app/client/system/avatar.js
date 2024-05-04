@@ -25,12 +25,55 @@ $(document).ready(function(){
     viewTemplate(this.value, templates);
   });
 
+  $("#button_save_avatar1").click(function(){
+    console.log("save avatar 1");
+    save_avatar();
+  });
+  $("#button_save_avatar2").click(function(){
+    console.log("save avatar 2");
+    save_avatar();
+  });
+
   loadTemplate(templates);
   viewTemplate(0, templates);
 
 });
 
-// const templates=[];
+function save_avatar(){
+  console.log("function save avatar ...");
+  let params = {
+    id:$("#selectTemplate").val(),
+    name:$("#inputNameTemplate").val()
+  };
+  if(params.id!=0&&params.name!=""){
+    let token = $('#csrfToken').val();
+    $.ajax({
+      url:'/register_avatar',
+      data:params,
+      type:'POST',
+      headers: {'X-CSRF-Token': token},
+      success:(json) => {
+        console.log('exito',json);
+        console.log('success',json.success);
+        if(json.success){
+            info.emitInfo('Exito','success',json.message);
+        }else{
+            info.emitInfo('Peligro','warning',json.message);
+        }
+            // hideModalUser();
+            // listUsers();
+
+
+      },
+      error:(xhr,status) => {
+        emitInfo('Error','info',xhr.responseJSON.message);
+      }
+    });
+  }else{
+    if(params.id==0)console.log("debe de selecionar un avatar");
+    if(params.name=='')console.log("debe de asignar un nombre");
+  }
+}
 
 function loadTemplate(templates){
   console.log("cargando plantillas");
